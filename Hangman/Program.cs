@@ -5,7 +5,16 @@ namespace Hangman
 {
     class Program
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        private static Random random = new Random();
+
+        /// <summary>
+        /// 
+        /// </summary>
         private static int health = 6;
+
         static void Main(string[] args)
         {
             // Print program explanation onto console:
@@ -18,8 +27,18 @@ namespace Hangman
 
             // A string for storing a message the program wants to tell the player.
             string msg = null;
+            
 
-            List<char> usedChars = new List<char>();
+
+            string secretWord = getRandomWord();
+            string[] outputWord = new string[secretWord.Length];
+
+            for (int i = 0; i < outputWord.Length; i++)
+            {
+                outputWord[i] = "_";
+            }
+
+            List<char> usedLetters = new List<char>();
 
             while (true)
             {
@@ -29,8 +48,27 @@ namespace Hangman
 
                 drawMan();
 
+                // Check if the man is dead, if he is then that means game over.
+                if (health <= 0)
+                {
+                    Console.WriteLine("Game over!");
+                    break;
+                }
+
+                // Print the unguessed word onto the console:
+                Console.Write("Guess the word: ");
+                for (int i = 0; i < outputWord.Length; i++)
+                {
+                    Console.Write(outputWord[i] + " ");
+                }
+                Console.WriteLine();
+
                 // Print used letters onto screen:
-                Console.WriteLine("Used letters: \n");
+                Console.WriteLine("Used letters: ");
+                foreach (char letter in usedLetters)
+                {
+                    Console.Write(letter + " ");
+                }
 
 
                 if (msg != null)
@@ -49,13 +87,54 @@ namespace Hangman
                 }
                 else if (guess.Length == 1)
                 {
-                    
+                    char letter = guess[0];
+
+                    if (usedLetters.Contains(letter))
+                    {
+                        msg = "You already guessed that letter. Try again.";
+                        continue;
+                    }
+
+                    if (secretWord.Contains(letter, StringComparison.OrdinalIgnoreCase))
+                    {
+                        for (int i = 0; i < secretWord.Length; i++)
+                        {
+                            if (string.Equals(secretWord[i].ToString(), guess, StringComparison.OrdinalIgnoreCase))
+                            {
+                                outputWord[i] = letter.ToString().ToLower();
+                            }
+                        }
+
+                        msg = "Nice job! You are one step closer to solving the word. Keep it up!";
+                    }
+                    else
+                    {
+                        msg = "Word does not contain '" + letter + "'. Try again.";
+                        health--;
+                    }
+
+                    usedLetters.Add(letter);
+
                 }
                 else
                 {
-
+                    if (string.Equals(guess, secretWord, StringComparison.OrdinalIgnoreCase))
+                    {
+                        Console.Clear();
+                        Console.WriteLine("Hangman - By: Darian Benam\n");
+                        Console.WriteLine("Congratulations, you guess the word!");
+                        break;
+                    }
+                    else
+                    {
+                        msg = "Your guess of '" + guess + "' was incorrect!";
+                        health--;
+                    }
                 }
             }
+
+
+            Console.ReadLine();
         }
 
         private static void drawMan()
@@ -135,10 +214,11 @@ namespace Hangman
             }
         }
 
-        private static void getRandomWord()
+        private static string getRandomWord()
         {
-            string[] wordbank = new string[] { "" };
+            string[] wordbank = new string[] { "Bob" };
 
+            return wordbank[random.Next(0, wordbank.Length - 1)];
         }
     }
 }
