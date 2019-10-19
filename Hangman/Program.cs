@@ -17,6 +17,9 @@ namespace Hangman
 
         static void Main(string[] args)
         {
+            // Change the title of the console:
+            Console.Title = "Hangman - By: Darian Benam";
+
             // Print program explanation onto console:
             Console.WriteLine("Hangman - By: Darian Benam");
             Console.WriteLine("This program is an exact replica of the class game called Hangman. The goal of the game is to guess a randomly generated word. ");
@@ -55,6 +58,13 @@ namespace Hangman
                     break;
                 }
 
+                // Check if the player got the correct word:
+                if (string.Equals(secretWord, string.Join("", outputWord), StringComparison.OrdinalIgnoreCase))
+                {
+                    Console.WriteLine("Congratulations, you guess the word!");
+                    break;
+                }
+
                 // Print the unguessed word onto the console:
                 Console.Write("Guess the word: ");
                 for (int i = 0; i < outputWord.Length; i++)
@@ -69,8 +79,9 @@ namespace Hangman
                 {
                     Console.Write(letter + " ");
                 }
+                Console.WriteLine();
 
-
+                // Print the message the program is trying to tell the user (ex: incorrect input, correct, etc.)
                 if (msg != null)
                 {
                     Console.WriteLine(msg + "\n");
@@ -88,6 +99,12 @@ namespace Hangman
                 else if (guess.Length == 1)
                 {
                     char letter = guess[0];
+
+                    if (!char.IsLetter(letter))
+                    {
+                        msg = "Your input of '" + letter + "' was invalid. You must enter a letter. Try again.";
+                        continue;
+                    }
 
                     if (usedLetters.Contains(letter))
                     {
@@ -145,7 +162,7 @@ namespace Hangman
                     Console.WriteLine();
                     Console.WriteLine(" |--------|");
                     Console.WriteLine(" |        |");
-                    Console.WriteLine(" |        O ");
+                    Console.WriteLine(" |        O");
                     Console.WriteLine(@" |       /|\ ");
                     Console.WriteLine(@" |       / \ ");
                     Console.WriteLine(" |");
@@ -155,7 +172,7 @@ namespace Hangman
                     Console.WriteLine();
                     Console.WriteLine(" |--------|");
                     Console.WriteLine(" |        |");
-                    Console.WriteLine(" |        O ");
+                    Console.WriteLine(" |        O");
                     Console.WriteLine(@" |       /|\ ");
                     Console.WriteLine(@" |       /");
                     Console.WriteLine(" |");
@@ -165,7 +182,7 @@ namespace Hangman
                     Console.WriteLine();
                     Console.WriteLine(" |--------|");
                     Console.WriteLine(" |        |");
-                    Console.WriteLine(" |        O ");
+                    Console.WriteLine(" |        O");
                     Console.WriteLine(@" |       /|\ ");
                     Console.WriteLine(@" |");
                     Console.WriteLine(" |");
@@ -175,7 +192,7 @@ namespace Hangman
                     Console.WriteLine();
                     Console.WriteLine(" |--------|");
                     Console.WriteLine(" |        |");
-                    Console.WriteLine(" |        O ");
+                    Console.WriteLine(" |        O");
                     Console.WriteLine(@" |       /|");
                     Console.WriteLine(@" |");
                     Console.WriteLine(" |");
@@ -185,7 +202,7 @@ namespace Hangman
                     Console.WriteLine();
                     Console.WriteLine(" |--------|");
                     Console.WriteLine(" |        |");
-                    Console.WriteLine(" |        O ");
+                    Console.WriteLine(" |        O");
                     Console.WriteLine(@" |        |");
                     Console.WriteLine(@" |");
                     Console.WriteLine(" |");
@@ -195,12 +212,13 @@ namespace Hangman
                     Console.WriteLine();
                     Console.WriteLine(" |--------|");
                     Console.WriteLine(" |        |");
-                    Console.WriteLine(" |        O ");
+                    Console.WriteLine(" |        O");
                     Console.WriteLine(@" |");
                     Console.WriteLine(@" |");
                     Console.WriteLine(" |");
                     Console.WriteLine();
                     break;
+                case 6:
                 default:
                     Console.WriteLine();
                     Console.WriteLine(" |--------|");
@@ -214,6 +232,10 @@ namespace Hangman
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         private static string getRandomWord()
         {
             string[] wordbank = new string[] { "Bob" };
