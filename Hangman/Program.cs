@@ -6,15 +6,19 @@ namespace Hangman
     class Program
     {
         /// <summary>
-        /// 
+        /// The random class which will be used for generating a random word in the getRandomWord() method.
         /// </summary>
         private static Random random = new Random();
 
         /// <summary>
-        /// 
+        /// The health of the man, less than or equal to 0 means he got hanged (game over).
         /// </summary>
         private static int health = 6;
 
+        /// <summary>
+        /// Main entry point of the program.
+        /// </summary>
+        /// <param name="args">The arguments passed to the program.</param>
         static void Main(string[] args)
         {
             // Change the title of the console:
@@ -25,15 +29,30 @@ namespace Hangman
             Console.WriteLine("This program is an exact replica of the class game called Hangman. The goal of the game is to guess a randomly generated word. ");
             Console.WriteLine("\nPress any key to begin playing...");
 
+            // Wait for the user to press any key and clear the console.
             Console.ReadKey();
             Console.Clear();
 
             // A string for storing a message the program wants to tell the player.
             string msg = null;
-            
-
-
+          
+            // A string that will store a randomly generated word.
             string secretWord = getRandomWord();
+
+            /*
+             *  A string array that will be printed onto the console. It will be the same length as
+             *  the secret word, except each letter will be replaced by an underscore. When the user
+             *  guesses a correct letter, the underscore where that letter appears will be replaced
+             *  by the correct letter.
+             *  
+             *  EX: Say the secret word was "darian"
+             *  
+             *  secretWord = "darian"
+             *  outputWord = "______"
+             *  
+             *  If the user guesses the letter d then outputWord would become:
+             *  outputWord = "d_____"
+             */
             string[] outputWord = new string[secretWord.Length];
 
             for (int i = 0; i < outputWord.Length; i++)
@@ -41,14 +60,16 @@ namespace Hangman
                 outputWord[i] = "_";
             }
 
+            // A list for storing used letters that the player already guessed.
             List<char> usedLetters = new List<char>();
 
             while (true)
             {
+                // Clear the console and print the title of the program.
                 Console.Clear();
-
                 Console.WriteLine("Hangman - By: Darian Benam\n");
 
+                // Draw the man that is being hanged onto the console:
                 drawMan();
 
                 // Check if the man is dead, if he is then that means game over.
@@ -91,21 +112,24 @@ namespace Hangman
                 Console.Write("Enter a letter or guess the word: ");
                 string guess = Console.ReadLine();
 
-                if (guess.Length == 0)
+                if (guess.Length == 0) // If the length is equal to 0, that means the player didn't enter a valid guess.
                 {
                     msg = "You can't leave the field blank! Try again.";
                     continue;
                 }
-                else if (guess.Length == 1)
+                else if (guess.Length == 1) // If the length is equal to 1, that means the player wants to guess a letter.
                 {
+                    // Convert the string to a char.
                     char letter = guess[0];
 
+                    // Make sure the char is a valid letter (ex: it should not be !, @, #, etc.).
                     if (!char.IsLetter(letter))
                     {
                         msg = "Your input of '" + letter + "' was invalid. You must enter a letter. Try again.";
                         continue;
                     }
 
+                    // Make sure the letter has not been guessed/used before.
                     if (usedLetters.Contains(letter))
                     {
                         msg = "You already guessed that letter. Try again.";
@@ -130,8 +154,8 @@ namespace Hangman
                         health--;
                     }
 
+                    // Add the letter to the list.
                     usedLetters.Add(letter);
-
                 }
                 else
                 {
@@ -154,6 +178,9 @@ namespace Hangman
             Console.ReadLine();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private static void drawMan()
         {
             switch (health)
