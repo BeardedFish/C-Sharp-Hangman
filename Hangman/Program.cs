@@ -1,4 +1,15 @@
-﻿using System;
+﻿/*
+ * Program Name: Hangman
+ * Program Description: This program is an exact copy of the classic game called Hangman. The goal of
+ *                      the program is for the player to guess a secret word. Each time the player
+ *                      guesses incorrectly, a part of a man is hanged on a noose. If the player
+ *                      doesn't guess the correct word and the man is fully hanged then it's
+ *                      game over.
+ * By: Darian Benam (GitHub: https://github.com/BeardedFish)
+ * Date: October 17, 2019
+ */
+
+using System;
 using System.Collections.Generic;
 
 namespace Hangman
@@ -54,10 +65,16 @@ namespace Hangman
              *  outputWord = "d_____"
              */
             string[] outputWord = new string[secretWord.Length];
-
             for (int i = 0; i < outputWord.Length; i++)
             {
-                outputWord[i] = "_";
+                if (secretWord[i].Equals(' '))
+                {
+                    outputWord[i] = " ";
+                }
+                else
+                {
+                    outputWord[i] = "_";
+                }
             }
 
             // A list for storing used letters that the player already guessed.
@@ -95,12 +112,12 @@ namespace Hangman
                 Console.WriteLine();
 
                 // Print used letters onto screen:
-                Console.WriteLine("Used letters: ");
+                Console.Write("Used letters: ");
                 foreach (char letter in usedLetters)
                 {
                     Console.Write(letter + " ");
                 }
-                Console.WriteLine();
+                Console.WriteLine("\n");
 
                 // Print the message the program is trying to tell the user (ex: incorrect input, correct, etc.)
                 if (msg != null)
@@ -172,14 +189,14 @@ namespace Hangman
                         health--;
                     }
                 }
-            }
+            } // End while loop.
 
 
             Console.ReadLine();
         }
 
         /// <summary>
-        /// 
+        /// Draws the current state of the man on the noose, depending on his health.
         /// </summary>
         private static void drawMan()
         {
@@ -189,7 +206,7 @@ namespace Hangman
                     Console.WriteLine();
                     Console.WriteLine(" |--------|");
                     Console.WriteLine(" |        |");
-                    Console.WriteLine(" |        O");
+                    Console.WriteLine(" |        O - I'm dead. :(");
                     Console.WriteLine(@" |       /|\ ");
                     Console.WriteLine(@" |       / \ ");
                     Console.WriteLine(" |");
@@ -260,12 +277,12 @@ namespace Hangman
         }
 
         /// <summary>
-        /// 
+        /// Generates a randomly generated word from a word bank string array.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>A string that contains a randomly generated word.</returns>
         private static string getRandomWord()
         {
-            string[] wordbank = new string[] { "Bob" };
+            string[] wordbank = new string[] { "august", "attempt", "calm", "cookies", "doll", "exist", "film", "facing", "memory", "poetry", "scared", "zoo", "university", "college", "slope", "math", "darian benam" };
 
             return wordbank[random.Next(0, wordbank.Length - 1)];
         }
