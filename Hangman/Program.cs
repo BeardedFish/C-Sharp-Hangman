@@ -93,6 +93,7 @@ namespace Hangman
                 if (health <= 0)
                 {
                     Console.WriteLine("Game over!");
+                    Console.WriteLine("The secret word was '" + secretWord + ".");
                     break;
                 }
 
