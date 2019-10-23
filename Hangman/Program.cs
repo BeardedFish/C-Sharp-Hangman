@@ -93,7 +93,7 @@ namespace Hangman
                 if (health <= 0)
                 {
                     Console.WriteLine("Game over!");
-                    Console.WriteLine("The secret word was '" + secretWord + ".");
+                    Console.WriteLine("The secret word was '" + secretWord + "'.");
                     break;
                 }
 
@@ -181,7 +181,7 @@ namespace Hangman
                     {
                         Console.Clear();
                         Console.WriteLine("Hangman - By: Darian Benam\n");
-                        Console.WriteLine("Congratulations, you guess the word!");
+                        Console.WriteLine("Congratulations, you guessed the word! The word was '" + guess + "'.");
                         break;
                     }
                     else
