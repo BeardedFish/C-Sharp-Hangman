@@ -48,7 +48,7 @@ namespace Hangman
             string msg = null;
           
             // A string that will store a randomly generated word.
-            string secretWord = getRandomWord();
+            string secretWord = GetRandomWord();
 
             /*
              *  A string array that will be printed onto the console. It will be the same length as
@@ -192,7 +192,6 @@ namespace Hangman
                 }
             } // End while loop.
 
-
             Console.ReadLine();
         }
 
@@ -219,7 +218,7 @@ namespace Hangman
                     Console.WriteLine(" |        |");
                     Console.WriteLine(" |        O");
                     Console.WriteLine(@" |       /|\ ");
-                    Console.WriteLine(@" |       /");
+                    Console.WriteLine(" |       /");
                     Console.WriteLine(" |");
                     Console.WriteLine();
                     break;
@@ -229,7 +228,7 @@ namespace Hangman
                     Console.WriteLine(" |        |");
                     Console.WriteLine(" |        O");
                     Console.WriteLine(@" |       /|\ ");
-                    Console.WriteLine(@" |");
+                    Console.WriteLine(" |");
                     Console.WriteLine(" |");
                     Console.WriteLine();
                     break;
@@ -238,8 +237,8 @@ namespace Hangman
                     Console.WriteLine(" |--------|");
                     Console.WriteLine(" |        |");
                     Console.WriteLine(" |        O");
-                    Console.WriteLine(@" |       /|");
-                    Console.WriteLine(@" |");
+                    Console.WriteLine(" |       /|");
+                    Console.WriteLine(" |");
                     Console.WriteLine(" |");
                     Console.WriteLine();
                     break;
@@ -248,8 +247,8 @@ namespace Hangman
                     Console.WriteLine(" |--------|");
                     Console.WriteLine(" |        |");
                     Console.WriteLine(" |        O");
-                    Console.WriteLine(@" |        |");
-                    Console.WriteLine(@" |");
+                    Console.WriteLine(" |        |");
+                    Console.WriteLine(" |");
                     Console.WriteLine(" |");
                     Console.WriteLine();
                     break;
@@ -258,8 +257,8 @@ namespace Hangman
                     Console.WriteLine(" |--------|");
                     Console.WriteLine(" |        |");
                     Console.WriteLine(" |        O");
-                    Console.WriteLine(@" |");
-                    Console.WriteLine(@" |");
+                    Console.WriteLine(" |");
+                    Console.WriteLine(" |");
                     Console.WriteLine(" |");
                     Console.WriteLine();
                     break;
@@ -269,8 +268,8 @@ namespace Hangman
                     Console.WriteLine(" |--------|");
                     Console.WriteLine(" |        |");
                     Console.WriteLine(" |");
-                    Console.WriteLine(@" |");
-                    Console.WriteLine(@" |");
+                    Console.WriteLine(" |");
+                    Console.WriteLine(" |");
                     Console.WriteLine(" |");
                     Console.WriteLine();
                     break;
@@ -281,7 +280,7 @@ namespace Hangman
         /// Generates a randomly generated word from a word bank string array.
         /// </summary>
         /// <returns>A string that contains a randomly generated word.</returns>
-        private static string getRandomWord()
+        private static string GetRandomWord()
         {
             string[] wordbank = new string[] { "august", "attempt", "calm", "cookies", "doll", "exist", "film", "facing", "memory", "poetry", "scared", "zoo", "university", "college", "slope", "math", "darian benam" };
 
